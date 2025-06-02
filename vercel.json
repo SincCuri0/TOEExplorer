@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "buildCommand": "npm run vercel-build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "DATABASE_URL": "postgres://neondb_owner:npg_InaOT1PdUlC3@ep-spring-thunder-a7l9b7ji-pooler.ap-southeast-2.aws.neon.tech/neondb?sslmode=require",
+    "NEXTAUTH_SECRET": "5SWJo5xlEM4xcxzluEwRxM/4LXLd2caj5YGS4pd+oys=",
+    "NEXTAUTH_URL": "https://evolvecommunity.vercel.app",
+    "RESEND_API_KEY": "re_CutD1Xe7_2KgowNEqCLcJTrVog9ihhus9"
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
+  ]
+} 
