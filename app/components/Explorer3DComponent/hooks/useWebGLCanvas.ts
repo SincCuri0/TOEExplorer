@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useWebGLContextHandler } from '../../../hooks/useWebGLContextHandler';
 import { RootState } from '@react-three/fiber';
 import { DEFAULT_CATEGORY } from '../utils/bandUtils';
