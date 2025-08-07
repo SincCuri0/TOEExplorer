@@ -2,14 +2,14 @@
 import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import type { Engine } from "tsparticles-engine";
+import type { Engine, ISourceOptions } from "tsparticles-engine";
 
 const ParticleBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
 
-  const particleOptions = {
+  const particleOptions: ISourceOptions = {
     background: {
       color: {
         value: "transparent",
@@ -77,11 +77,12 @@ const ParticleBackground = () => {
       <Particles
         id="tsparticles"
         init={particlesInit}
-        options={particleOptions as any}
+        options={particleOptions}
       />
     </div>
   );
 };
 
 export default ParticleBackground;
+
 
