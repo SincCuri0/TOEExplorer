@@ -1,78 +1,52 @@
 import React from 'react';
 import { animated } from '@react-spring/web';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { X } from 'lucide-react';
 import { CRITERIA } from '../../theory-data';
 import { ExpandableSection } from './ExpandableSection';
-
-const AnimatedDiv = animated.div;
 
 interface TheoryPanelProps {
   theory: any | null;
   onClose: () => void;
 }
 
+const AnimatedCard = animated(Card);
+
 export const TheoryPanel: React.FC<TheoryPanelProps> = ({ theory, onClose }) => {
   if (!theory) return null;
 
   return (
-    <AnimatedDiv
-      style={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: 360,
-        height: '100%',
-        background: 'rgba(15, 15, 30, 0.97)',
-        color: '#fff',
-        padding: '1.5rem 1.5rem 1.5rem 1rem',
-        boxShadow: '-2px 0 16px 0 #000a',
-        zIndex: 10,
-        overflowY: 'auto',
-        borderLeft: '2px solid #222',
-      }}
+    <AnimatedCard
+      className="absolute top-0 right-0 h-full w-96 bg-card/90 backdrop-blur-sm border-l border-border shadow-2xl z-10 flex flex-col"
     >
-      <button
-        style={{
-          position: 'absolute',
-          top: 8,
-          right: 12,
-          background: '#222',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 4,
-          padding: '4px 10px',
-          cursor: 'pointer',
-          fontSize: 18,
-        }}
-        onClick={onClose}
-        title="Close"
-      >
-        ×
-      </button>
-      <h2
-        style={{
-          margin: '0 0 0.5rem 0',
-          fontWeight: 700,
-          fontSize: 24,
-          color: theory.color,
-        }}
-      >
-        {theory.name}
-      </h2>
-      {theory.subtitle && (
-        <div style={{ color: '#aaa', fontSize: 16, marginBottom: 8 }}>
-          {theory.subtitle}
+      <CardHeader className="flex flex-row items-start justify-between p-4">
+        <div>
+          <CardTitle className="text-2xl font-bold" style={{ color: theory.color }}>
+            {theory.name}
+          </CardTitle>
+          {theory.subtitle && (
+            <p className="text-sm text-muted-foreground">{theory.subtitle}</p>
+          )}
         </div>
-      )}
-      <div style={{ marginBottom: 14, fontSize: 15 }}>{theory.description}</div>
-      <div>
-        {CRITERIA.map((crit) => (
-          <ExpandableSection
-            key={crit.key}
-            title={crit.label}
-            value={theory.criteria[crit.key]}
-          />
-        ))}
-      </div>
-    </AnimatedDiv>
+        <Button variant="ghost" size="icon" onClick={onClose} className="text-muted-foreground hover:text-foreground">
+          <X className="h-5 w-5" />
+          <span className="sr-only">Close</span>
+        </Button>
+      </CardHeader>
+      <CardContent className="flex-grow overflow-y-auto p-4 pt-0">
+        <p className="mb-4 text-foreground/80">{theory.description}</p>
+        <div className="space-y-2">
+          {CRITERIA.map((crit) => (
+            <ExpandableSection
+              key={crit.key}
+              title={crit.label}
+              value={theory.criteria[crit.key]}
+            />
+          ))}
+        </div>
+      </CardContent>
+    </AnimatedCard>
   );
 };
+
