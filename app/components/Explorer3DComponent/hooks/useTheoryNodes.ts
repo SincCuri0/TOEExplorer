@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
-import { THEORIES } from '../../../components/theory-data';
+import { THEORIES, Theory } from '../../../components/theory-data';
 import { BAND_Y_POSITIONS, valueToBand, BandType, DEFAULT_CATEGORY } from '../utils/bandUtils';
+import { TheoryNode } from '../types';
 
 export const useTheoryNodes = (selectedCategory: string = DEFAULT_CATEGORY) => {
   const { nodes, bandY } = useMemo(() => {
     if (!THEORIES || THEORIES.length === 0) return { nodes: [], bandY: BAND_Y_POSITIONS };
     
     // Group theories by band
-    const bands: Record<BandType, any[]> = { 
+    const bands: Record<BandType, Theory[]> = {
       high: [], 
       medium: [], 
       low: []
@@ -25,7 +26,7 @@ export const useTheoryNodes = (selectedCategory: string = DEFAULT_CATEGORY) => {
     });
 
     // Layout: arrange each band in a horizontal circle, with Y position by band
-    const allNodes: any[] = [];
+    const allNodes: TheoryNode[] = [];
     
     // Sort bands: high -> medium -> low
     (['high', 'medium', 'low'] as BandType[]).forEach((band) => {
@@ -33,7 +34,7 @@ export const useTheoryNodes = (selectedCategory: string = DEFAULT_CATEGORY) => {
       if (!Array.isArray(group) || group.length === 0) return;
       
       const angleStep = (2 * Math.PI) / group.length;
-      group.forEach((theory: any, i: number) => {
+      group.forEach((theory: Theory, i: number) => {
         const angle = i * angleStep;
         allNodes.push({
           ...theory,
@@ -54,3 +55,4 @@ export const useTheoryNodes = (selectedCategory: string = DEFAULT_CATEGORY) => {
 
   return { nodes, bandY };
 };
+
