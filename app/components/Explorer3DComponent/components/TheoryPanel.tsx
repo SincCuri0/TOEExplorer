@@ -3,11 +3,11 @@ import { animated } from '@react-spring/web';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
-import { CRITERIA } from '../../theory-data';
+import { CRITERIA, Theory } from '../../theory-data';
 import { ExpandableSection } from './ExpandableSection';
 
 interface TheoryPanelProps {
-  theory: any | null;
+  theory: Theory | null;
   onClose: () => void;
 }
 
