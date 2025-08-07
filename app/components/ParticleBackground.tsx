@@ -62,3 +62,26 @@ const ParticleBackground = () => {
       opacity: {
         value: 0.1,
       },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 1, max: 5 },
+      },
+    },
+    detectRetina: true,
+  };
+
+  return (
+    <div className="absolute inset-0 -z-10">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={particleOptions as any}
+      />
+    </div>
+  );
+};
+
+export default ParticleBackground;
+
