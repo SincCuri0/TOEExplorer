@@ -1,44 +1,31 @@
 import React from 'react';
 import { CRITERIA } from '../../theory-data';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface CategorySelectorProps {
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
 }
 
-export const CategorySelector: React.FC<CategorySelectorProps> = ({
-  selectedCategory,
-  onCategoryChange,
-}) => (
-  <div style={{
-    position: 'absolute',
-    top: 18,
-    left: 18,
-    zIndex: 20,
-    background: 'rgba(20,20,40,0.95)',
-    borderRadius: 8,
-    padding: '10px 16px',
-    boxShadow: '0 2px 12px #000a',
-    color: '#fff',
-    fontSize: 16,
-  }}>
-    <label htmlFor="category-select" style={{ fontWeight: 600, marginRight: 8 }}>Sort by:</label>
-    <select
-      id="category-select"
-      value={selectedCategory}
-      onChange={e => onCategoryChange(e.target.value)}
-      style={{
-        background: '#181830',
-        color: '#fff',
-        border: '1px solid #333',
-        borderRadius: 4,
-        fontSize: 16,
-        padding: '2px 8px',
-      }}
-    >
-      {CRITERIA.map(crit => (
-        <option key={crit.key} value={crit.key}>{crit.label}</option>
-      ))}
-    </select>
-  </div>
-);
+export const CategorySelector: React.FC<CategorySelectorProps> = ({ selectedCategory, onCategoryChange }) => {
+  return (
+    <div className="absolute top-4 left-4 z-20 bg-card/80 backdrop-blur-md p-2 rounded-lg shadow-lg border border-border">
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium text-muted-foreground px-2">Sort by:</span>
+        {CRITERIA.map((crit) => (
+          <Button
+            key={crit.key}
+            variant={selectedCategory === crit.key ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => onCategoryChange(crit.key)}
+            className={cn('transition-all', { 'text-primary-foreground': selectedCategory === crit.key })}
+          >
+            {crit.label}
+          </Button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
