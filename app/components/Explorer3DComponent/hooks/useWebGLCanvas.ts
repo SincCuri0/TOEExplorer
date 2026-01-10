@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useWebGLContextHandler } from '../../../hooks/useWebGLContextHandler';
 import { RootState } from '@react-three/fiber';
 import { DEFAULT_CATEGORY } from '../utils/bandUtils';
@@ -8,7 +8,6 @@ export const useWebGLCanvas = () => {
   const [selectedTheoryId, setSelectedTheoryId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [renderKey, setRenderKey] = useState(0);
-  const prevSelectedId = useRef<string | null>(null);
 
   // Handle WebGL context loss and restoration
   useWebGLContextHandler(selectedTheoryId, setSelectedTheoryId);

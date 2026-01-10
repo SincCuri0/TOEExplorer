@@ -1,10 +1,8 @@
-export interface TheoryNodeType {
-  id: string;
-  name: string;
-  color: string;
+import { Theory } from "../theory-data";
+
+export interface TheoryNode extends Theory {
   position: [number, number, number];
-  // Add any other properties that your theory nodes might have
-  [key: string]: any; // For any additional dynamic properties
+  band: 'high' | 'medium' | 'low';
 }
 
 export interface Band {
@@ -12,7 +10,7 @@ export interface Band {
   label: string;
   color: string;
   yPosition: number;
-  theories: TheoryNodeType[];
+  theories: TheoryNode[];
 }
 
 export interface CategoryOption {

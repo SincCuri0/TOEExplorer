@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { useMeasure } from 'react-use'; // You'll need to install react-use if not already installed
 
 interface ExpandableSectionProps {
   title: string;
   children?: React.ReactNode;
-  value?: any;
+  value?: React.ReactNode;
   defaultExpanded?: boolean;
   className?: string;
 }
